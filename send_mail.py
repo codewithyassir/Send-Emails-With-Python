@@ -109,14 +109,6 @@ html_part = MIMEText(html, 'html')
 msg.attach(html_part)
 
 
-with open('cv.pdf', 'rb') as my_file:
-	cv = my_file.read()
-
-pdf = MIMEApplication(cv, maintype='application/pdf', subtype='octet-stream')
-pdf.add_header('Content-Disposition','attachment', filename=my_file.name)
-msg.attach(pdf)
-
-
 with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
     server.login(sender_email, email_password)
     server.sendmail(sender_email, recipient_email, msg.as_string())
